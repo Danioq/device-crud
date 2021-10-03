@@ -3,7 +3,7 @@ package http
 import (
 	"net/http"
 
-	"github.com/Danioq/device-crud/backend/service"
+	"backend/service"
 )
 
 func deleteDeviceHandler(w http.ResponseWriter, r *http.Request) {

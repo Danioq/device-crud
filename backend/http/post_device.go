@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/Danioq/device-crud/backend/service"
+	"backend/service"
 )
 
 type PostDevice struct {

@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/Danioq/device-crud/backend/http"
+	"backend/http"
 )
 
 func main() {

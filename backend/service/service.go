@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/Danioq/device-crud/backend/db"
+	"backend/db"
 	"github.com/google/uuid"
 )
 

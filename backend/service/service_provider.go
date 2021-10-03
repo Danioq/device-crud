@@ -3,7 +3,7 @@ package service
 import (
 	"sync"
 
-	"github.com/Danioq/device-crud/backend/db"
+	"backend/db"
 )
 
 var (
@@ -13,7 +13,7 @@ var (
 
 func GetService() *ServiceImpl {
 	serviceImplSync.Do(func() {
-		serviceImpl = &ServiceImpl{dbClient: db.NewDBClient()}
+		serviceImpl = &ServiceImpl{dbClient: db.GetDBClient()}
 	})
 
 	return serviceImpl
