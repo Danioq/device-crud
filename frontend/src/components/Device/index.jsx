@@ -11,8 +11,8 @@ const Device = (props) => {
   const handleDelete = () => {
     dispatch({ type: 'DEVICE_DELETE_REQUEST', payload: props.device.id })
   }
-  return <div className="row">
-      <div className="col">{props.device.id}</div>
+  return <div className="row mt-4">
+      <div className="col-5">{props.device.id}</div>
       <div className="col">{props.device.name}</div>
       <div className="col">{props.device.description}</div>
       <div className="col">{props.device.disabled ? 'true' : 'false'}</div>

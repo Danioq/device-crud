@@ -64,7 +64,7 @@ const EditDevice = () => {
           />
         </label>
         <label className="row">
-                    <input
+        <input
             type="checkbox"
             name="disabled"
             onChange={handleChange}
@@ -73,7 +73,6 @@ const EditDevice = () => {
             className="col-1 align-items-center"
             />
         <div className="col-1">
-
             Disabled
             </div>
         </label>

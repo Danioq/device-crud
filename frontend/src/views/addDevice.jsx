@@ -22,30 +22,40 @@ const AddDevice = () => {
     }}
   >
     {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.name}
-        />
+      <form onSubmit={handleSubmit} className="container">
+        <label className="row">
+          Name
+          <input
+            type="text"
+            name="name"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.name}
+          />
+        </label>
         {errors.name && touched.name && errors.name}
-        <input
-          type="text"
-          name="description"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.description}
-        />
-        <input
-          type="checkbox"
-          name="disabled"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.disabled}
-        />
-        <button type="submit">
+        <label className="row">
+          Description
+          <input
+            type="text"
+            name="description"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.description}
+          />
+        </label>
+        <label className="row">
+          <input
+            type="checkbox"
+            name="disabled"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.disabled}
+            className="col-1"
+          />
+          <div className="col-1">Disabled</div>
+        </label>
+        <button type="submit" className="row btn btn-primary">
           Add Device
         </button>
       </form>

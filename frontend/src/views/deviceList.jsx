@@ -10,10 +10,13 @@ const DeviceList = () => {
   useEffect(() => {
     dispatch({ type: 'DEVICES_FETCH_REQUEST' })
   }, [])
-  return <div className="container">
-    <DeviceHeaders/>
-    {devices.map(device => <Device device={device} key={device.id} />)}
-  </div>
+  return <>
+    <button className="btn btn-primary" onClick={() => window.location.assign('/add')}>Add Device</button>
+    <div className="container">
+      <DeviceHeaders/>
+      {devices.map(device => <Device device={device} key={device.id} />)}
+    </div>
+  </>
 }
 
 export default DeviceList
