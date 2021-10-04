@@ -1,6 +1,7 @@
 package db
 
 import (
+	"os"
 	"sync"
 
 	"github.com/go-redis/redis"
@@ -13,9 +14,9 @@ func GetDBClient() *DBImpl {
 	ClientOnce.Do(func() {
 		Client = &DBImpl{
 			Client: redis.NewClient(&redis.Options{
-				Addr: "localhost:6379",
+				Addr: os.Getenv("REDIS_URL"),
 				Password: "",
-				DB: 0,
+				DB: 0,				
 			}),
 		}
 	})

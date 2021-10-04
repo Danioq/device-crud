@@ -18,4 +18,7 @@ func applyRoutes(r *mux.Router) {
 	r.Path("/device").Methods(http.MethodPost).HandlerFunc(postDeviceHandler)
 	r.Path("/device").Methods(http.MethodPatch).HandlerFunc(patchDeviceHandler)
 	r.Path("/device/{id}").Methods(http.MethodDelete).HandlerFunc(deleteDeviceHandler)
+	r.Path("/devices").Methods(http.MethodOptions).HandlerFunc(optionsHandler)
+	r.Path("/device").Methods(http.MethodOptions).HandlerFunc(optionsHandler)
+	r.Path("/device/{id}").Methods(http.MethodOptions).HandlerFunc(optionsHandler)
 }

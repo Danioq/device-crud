@@ -3,6 +3,7 @@ package http
 import (
 	"encoding/json"
 	"io/ioutil"
+	"log"
 	"net/http"
 
 	"backend/service"
@@ -16,19 +17,24 @@ type PostDevice struct {
 
 func postDeviceHandler(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
+		log.Default().Println(r.Body)
 	defer r.Body.Close()
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		responseError(w, err)
 		return
 	}
 
 	var device PostDevice
-	json.Unmarshal(body, &device)
+	err = json.Unmarshal(body, &device) 
+	if err != nil {
+		responseError(w, err)
+		return
+	}
 	err = service.GetService().AddDevice(device.Name, device.Description, device.Disabled)
 	
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		responseError(w, err)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
+	response(w, nil, http.StatusOK)
 }

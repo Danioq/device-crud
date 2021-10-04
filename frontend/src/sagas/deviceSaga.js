@@ -12,8 +12,9 @@ function* fetchDevices() {
 
 function* deleteDevice(action) {
   try {
-    yield call(Api.del, action.payload.deviceID)
+    yield call(Api.del, action.payload)
     yield put({ type: 'DEVICE_DELETE_SUCCEEDED' })
+    yield put({ type: 'DEVICES_FETCH_REQUEST' })
   } catch (e) {
     yield put({ type: 'DEVICE_DELETE_FAILED', payload: e.message })
   }
@@ -21,8 +22,9 @@ function* deleteDevice(action) {
 
 function* patchDevice(action) {
   try {
-    yield call(Api.patch, action.payload.device)
+    yield call(Api.patch, action.payload)
     yield put({ type: 'DEVICE_PATCH_SUCCEEDED' })
+    yield put({ type: 'DEVICES_FETCH_REQUEST' })
   } catch (e) {
     yield put({ type: 'DEVICE_PATCH_FAILED', payload: e.message })
   }
@@ -30,8 +32,9 @@ function* patchDevice(action) {
 
 function* postDevice(action) {
   try {
-    yield call(Api.post, action.payload.device)
+    yield call(Api.post, action.payload)
     yield put({ type: 'DEVICE_POST_SUCCEEDED' })
+    yield put({ type: 'DEVICES_FETCH_REQUEST' })
   } catch (e) {
     yield put({ type: 'DEVICE_POST_FAILED', payload: e.message })
   }
@@ -42,7 +45,6 @@ export default function* deviceSaga() {
     takeEvery('DEVICES_FETCH_REQUEST', fetchDevices),
     takeEvery('DEVICE_DELETE_REQUEST', deleteDevice),
     takeEvery('DEVICE_PATCH_REQUEST', patchDevice),
-    takeEvery('DEVICE_POST_REQUEST', postDevice),
-    takeEvery('*SUCCEEDED', fetchDevices)
+    takeEvery('DEVICE_POST_REQUEST', postDevice)
   ])
 }

@@ -1,0 +1,4 @@
+vendor/
+backend
+backend.exe
+Dockerfile

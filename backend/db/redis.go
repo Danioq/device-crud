@@ -6,14 +6,13 @@ import (
 	"errors"
 
 	"github.com/go-redis/redis"
-	"github.com/google/uuid"
 )
 
 type DB interface {
 	GetDevices() ([]model.Device, error)
 	AddDevice(device model.Device) error
 	EditDevice(device model.Device) error
-	DeleteDevice(id uuid.UUID) error
+	DeleteDevice(id string) error
 }
 
 type DBImpl struct {
@@ -21,30 +20,43 @@ type DBImpl struct {
 }
 
 func (impl *DBImpl) GetDevices() ([]model.Device, error) {
-	val, err := impl.Client.Get("*").Result()
+	keys, err := impl.Client.Keys("*").Result()
 	if err != nil {
 		return nil, err
 	}
 	var devices []model.Device
-	err = json.Unmarshal([]byte(val), &devices)
-	if err != nil {
-		return nil, err
+	for _, key := range keys {
+		var device model.Device
+		dev, err := impl.Client.Get(key).Result()
+		if err != nil {
+			return nil, err
+		}
+		err = json.Unmarshal([]byte(dev), &device)
+		if err != nil {
+			return nil, err
+		}
+		devices = append(devices, device)
 	}
+
 	return devices, nil
 }
 
 func (impl *DBImpl) AddDevice(device model.Device) error {
-	_, err := impl.Client.Get(device.Id.String()).Result()
+	_, err := impl.Client.Get(device.Id).Result()
 	if err == nil {
 		return errors.New("device already exists")
 	}
-	return impl.Client.Set(device.Id.String(), device, 0).Err()
+	marshaledDevice, err := json.Marshal(device)
+	if err != nil {
+		return err
+	}
+	return impl.Client.Set(device.Id, marshaledDevice, 0).Err()
 
 }
 
 
 func (impl *DBImpl) EditDevice(device model.Device) error {
-	_, err := impl.Client.Get(device.Id.String()).Result()
+	err := impl.DeleteDevice(device.Id)
 	if err != nil {
 		return err
 	}
@@ -52,6 +64,6 @@ func (impl *DBImpl) EditDevice(device model.Device) error {
 }
 
 
-func (impl *DBImpl) DeleteDevice(id uuid.UUID) error {
-	return impl.Client.Del(id.String()).Err()
+func (impl *DBImpl) DeleteDevice(id string) error {
+	return impl.Client.Del(id).Err()
 }

@@ -4,13 +4,16 @@ import (
 	"net/http"
 
 	"backend/service"
+
+	"github.com/gorilla/mux"
 )
 
 func deleteDeviceHandler(w http.ResponseWriter, r *http.Request) {
-	id := r.URL.Query().Get("id")
+	id := mux.Vars(r)["id"]
 	err := service.GetService().DeleteDevice(id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		responseError(w, err)
+		return
 	}
-	w.WriteHeader(http.StatusOK)
+	response(w, nil, http.StatusOK)
 }

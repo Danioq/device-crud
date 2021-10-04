@@ -1,4 +1,4 @@
-const patchURL = `${process.env.API_URL}\\device`
+const patchURL = `${process.env.REACT_APP_API_URL}\\device`
 
 export const patch = (data) => fetch(patchURL, {
   method: 'PATCH',

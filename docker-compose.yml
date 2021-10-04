@@ -4,6 +4,24 @@ services:
     image: redis:alpine
     ports:
       - 6379:6379
-  backend:
+    container_name: redis
+  api:
     build:
-      dockerfile: backend/Dockerfile
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    container_name: api
+    links:
+      - redis
+    environment: 
+      - REDIS_URL=redis:6379
+  web_app:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: web_app
+    ports: 
+      - 3000:3000
+    environment: 
+      - REACT_APP_API_URP=backend:8080

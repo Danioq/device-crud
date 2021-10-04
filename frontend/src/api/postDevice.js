@@ -1,4 +1,4 @@
-const postURL = `${process.env.API_URL}\\device`
+const postURL = `${process.env.REACT_APP_API_URL}\\device`
 
 export const post = (data) => fetch(postURL, {
   method: 'POST',
@@ -7,4 +7,3 @@ export const post = (data) => fetch(postURL, {
   },
   body: JSON.stringify(data)
 }).then(response => response)
-  .catch(e => e)

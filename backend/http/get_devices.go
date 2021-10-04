@@ -10,11 +10,17 @@ import (
 func getDevicesHandler(w http.ResponseWriter, r *http.Request) {
 	devices, err := service.GetService().GetDevices()
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		responseError(w, err)
+		return
 	}
 	if len(devices) == 0 {
-		http.NotFound(w, r)
+		response(w, nil, http.StatusNotFound)
+		return
 	}
 	responseBody, err := json.Marshal(devices)
+	if err != nil {
+		responseError(w, err)
+		return
+	}
 	response(w, responseBody, http.StatusOK)
 }
