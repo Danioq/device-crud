@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Device Match Snapshot 1`] = `
+<div
+  className="addEditDeviceContainer"
+>
+  <div
+    className="headerInfo"
+  >
+    <div>
+      Editing:
+    </div>
+     
+    <b>
+      09458915-dfbc-4408-a7c4-5d3162f43964
+    </b>
+  </div>
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        htmlFor="addNameInput"
+      >
+        Name
+      </label>
+      <input
+        className="form-control"
+        id="addNameInput"
+        name="name"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="text"
+        value="Device Name"
+      />
+      <div
+        className="form-group"
+      />
+      <label
+        htmlFor="addDescriptionInput"
+      >
+        Description
+      </label>
+      <textarea
+        className="form-control"
+        id="addDescriptionInput"
+        name="description"
+        onBlur={[Function]}
+        onChange={[Function]}
+        rows="5"
+        type="text"
+        value="This is device description"
+      />
+      <div
+        className="form-check"
+      >
+        <input
+          className="form-check-input"
+          id="addDisabledCheck"
+          name="disabled"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="checkbox"
+          value={false}
+        />
+        <label
+          className="form-check-label"
+          htmlFor="addDisabledCheck"
+        >
+          Disabled
+        </label>
+      </div>
+      <button
+        className="btn btn-primary"
+        type="submit"
+      >
+        Add Device
+      </button>
+      <button
+        className="btn btn-primary cancelButton"
+        onClick={[Function]}
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+`;
