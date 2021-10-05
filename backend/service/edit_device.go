@@ -5,6 +5,9 @@ import (
 )
 
 func (s *ServiceImpl) EditDevice(id string, name string, description string, disabled bool) error {
+		if err := checkName(name); err != nil {
+		return err
+	}
 	device := model.Device{
 		Id:          id,
 		Name:        name,
